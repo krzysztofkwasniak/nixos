@@ -7,39 +7,6 @@
     ];
 
 
-   # --- 1. Środowisko COSMIC ---
-  services.displayManager.cosmic-greeter.enable = true;
-  services.desktopManager.cosmic.enable = true;
-
-  # Harmonogram procesów System76 (poprawia płynność i czas reakcji pulpitu)
-  services.system76-scheduler.enable = true;
-
-  # Zmienne środowiskowe dla schowka i natywnego trybu Wayland w aplikacjach Electron/Chromium
-  environment.sessionVariables = {
-    COSMIC_DATA_CONTROL_ENABLED = 1;
-    NIXOS_OZONE_WL = "1";
-COSMIC_DISABLE_DIRECT_SCANOUT = "y";
-  };
-
-  # --- 2. Konfiguracja grafiki AMD (Wayland / Vulkan / Akceleracja) ---
-  boot.initrd.kernelModules = [ "amdgpu" ];
-  services.xserver.videoDrivers = [ "amdgpu" ];
-
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true; # Wymagane m.in. przez Steam, Wine oraz 32-bitowe biblioteki
-  };
-
-  # --- 3. Przydatne pakiety systemowe ---
-  environment.systemPackages = with pkgs; [
-    cosmic-ext-tweaks # Dodatkowe opcje personalizacji (np. zaawansowane motywy i panele)
-    wl-clipboard      # Obsługa schowka z poziomu terminala
-  ];
-
-  # Zapobiega konfliktom motywów GTK/libadwaita w przeglądarce Firefox
-  programs.firefox.preferences = {
-    "widget.gtk.libadwaita-colors.enabled" = false;
-  };
 
 nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
@@ -95,8 +62,8 @@ nix.settings.experimental-features = [ "nix-command" "flakes" ];
     };
   };
 
- # services.displayManager.sddm.enable = true;
- # services.desktopManager.plasma6.enable = true;
+ services.displayManager.sddm.enable = true;
+ services.desktopManager.plasma6.enable = true;
 
   # Dźwięk (PipeWire)
   services.pulseaudio.enable = false;
