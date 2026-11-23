@@ -18,6 +18,7 @@
   environment.sessionVariables = {
     COSMIC_DATA_CONTROL_ENABLED = 1;
     NIXOS_OZONE_WL = "1";
+COSMIC_DISABLE_DIRECT_SCANOUT = "y";
   };
 
   # --- 2. Konfiguracja grafiki AMD (Wayland / Vulkan / Akceleracja) ---
